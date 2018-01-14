@@ -1,0 +1,13 @@
+
+# These are the Raspberry Pi machines.
+[rpi]
+aprs002
+
+[direwolf_hosts]
+aprs002
+
+[rpi:vars]
+ansible_user=pi
+ansible_become=true
+ansible_become_method='sudo'
+ansible_become_user='root'

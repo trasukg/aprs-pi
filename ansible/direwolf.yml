@@ -1,0 +1,42 @@
+---
+- hosts: direwolf_hosts
+  tasks:
+    # - name: Remove PulseAudio
+    #   apt:
+    #     update_cache: yes
+    #     name: 'pulseaudio'
+    #     state: absent
+    #
+    # - name: Install libasound2-dev
+    #   apt:
+    #     name: 'libasound2-dev'
+    #     state: present
+    #
+    # - name: Make sure we have git
+    #   apt:
+    #     name: git
+    #
+    # - name: Get DireWolf
+    #   git:
+    #     repo: https://github.com/wb2osz/direwolf.git
+    #     version: 1.3
+    #     dest: /home/pi/direwolf
+
+    - name: Make DireWolf
+      make:
+        chdir: /home/pi/direwolf
+
+    - name: Install DireWolf
+      make:
+        chdir: /home/pi/direwolf
+        target: install
+
+    - name: Make a Desktop dir to keep DireWolf happy
+      file:
+        path: /root/Desktop
+        state: directory
+
+    - name: Install DireWolf RPi
+      make:
+        chdir: /home/pi/direwolf
+        target: install-rpi
