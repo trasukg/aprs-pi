@@ -31,6 +31,8 @@ def main(stdscr):
                 GPIO.output(pin, GPIO.LOW)
             stdscr.refresh()
         elif c == ord('q'):
+            if GPIO != None:
+                GPIO.cleanup()
             break
 
 
