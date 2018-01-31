@@ -6,7 +6,7 @@ try:
 except:
     GPIO = None
 
-pin = 2
+pin = 10
 
 def main(stdscr):
     (y,x) = stdscr.getmaxyx()
