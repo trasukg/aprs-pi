@@ -1,4 +1,4 @@
-update=Friday, December 29, 2017 'amt' 02:02:16 am
+update=Thursday, February 01, 2018 'pmt' 02:51:07 pm
 version=1
 last_client=kicad
 [pcbnew]
@@ -58,3 +58,13 @@ LibName28=contrib
 LibName29=valves
 [general]
 version=1
+[schematic_editor]
+version=1
+PageLayoutDescrFile=
+PlotDirectoryName=/Users/trasukg/temp/vg/plot/
+SubpartIdSeparator=0
+SubpartFirstId=65
+NetFmtName=
+SpiceForceRefPrefix=0
+SpiceUseNetNumbers=0
+LabSize=60
