@@ -1,42 +1,61 @@
 ---
 - hosts: direwolf_hosts
   tasks:
-    # - name: Remove PulseAudio
-    #   apt:
-    #     update_cache: yes
-    #     name: 'pulseaudio'
-    #     state: absent
-    #
-    # - name: Install libasound2-dev
-    #   apt:
-    #     name: 'libasound2-dev'
-    #     state: present
-    #
-    # - name: Make sure we have git
-    #   apt:
-    #     name: git
-    #
-    # - name: Get DireWolf
-    #   git:
-    #     repo: https://github.com/wb2osz/direwolf.git
-    #     version: 1.3
-    #     dest: /home/pi/direwolf
+    - name: Remove PulseAudio
+      become: true
+      apt:
+        update_cache: yes
+        name: 'pulseaudio'
+        state: absent
+
+    - name: Install libasound2-dev
+      become: true
+      apt:
+        name: 'libasound2-dev'
+        state: present
+
+    - name: Make sure we have git
+      become: true
+      apt:
+        name: git
+
+    - name: Get DireWolf
+      git:
+        repo: https://github.com/wb2osz/direwolf.git
+        version: 1.5
+        dest: /home/pi/direwolf
 
     - name: Make DireWolf
       make:
         chdir: /home/pi/direwolf
 
-    - name: Install DireWolf
-      make:
-        chdir: /home/pi/direwolf
-        target: install
+    # - name: Install DireWolf
+    #   become: true
+    #   make:
+    #     chdir: /home/pi/direwolf
+    #     target: install
 
     - name: Make a Desktop dir to keep DireWolf happy
+      become: true
       file:
         path: /root/Desktop
         state: directory
 
     - name: Install DireWolf RPi
+      become: true
       make:
         chdir: /home/pi/direwolf
         target: install-rpi
+
+    - name: Install DireWolf RPi configuration
+      become: false
+      template:
+        src:  templates/direwolf.conf.j2
+        dest: /home/pi/direwolf.conf
+
+    - name: Add pi to gpio group
+      user:
+        name: pi
+        groups: gpio
+        append: yes
+        

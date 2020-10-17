@@ -1,13 +1,13 @@
 
 # These are the Raspberry Pi machines.
 [rpi]
-aprs002
+barcpi004
 
 [direwolf_hosts]
-aprs002
+barcpi004 audio_device='plughw:1,0' dw_port=9001
 
 [rpi:vars]
 ansible_user=pi
-ansible_become=true
+# ansible_become=true
 ansible_become_method='sudo'
 ansible_become_user='root'
